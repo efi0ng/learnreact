@@ -18,16 +18,13 @@ const Book = ({title, author, pages}) => {
 }
 
 class Library extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            open: false,
-            visitors: 0
-        }
-        this.toggleOpenClosed = this.toggleOpenClosed.bind(this);
+    state = {
+        open: false,
+        visitors: 0
     }
 
-    toggleOpenClosed() {
+    // arrow functions automatically bind
+    toggleOpenClosed = () => {
         // setState is asynchronous
         this.setState( (prevState, props) => ({
             open: !prevState.open,
