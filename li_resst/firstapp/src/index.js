@@ -1,89 +1,27 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 
-let skiData = {
-    total: 50,
-    powder: 20,
-    backcountry: 10,
-    goal: 100
-}
-
-// component as an ES6 class
-
-class SkiDayCounter extends Component {
-    getPercent = decimal => {
-        return decimal * 100 + '%';
-    }
-
-    calcGoalProgress = (total, goal) => {
-        return this.getPercent(total/goal);
-    }
-
-    render() {
-        // destructure props object - ES6
-        const { total, powder, backcountry, goal} = this.props.data;
-
-        return (
-            <section>
-                <div>
-                    <p>Total days: {total}</p>
-                </div>
-                <div>
-                    <p>Power days: {powder}</p>
-                </div>
-                <div>
-                    <p>Backcountry days: {backcountry}</p>
-                </div>
-                <div>
-                    <p>Goal Progress: {this.calcGoalProgress(total, goal)}</p>
-                </div>
-            </section>
-        )
-    }
-}
-
-// now the same component as a function
-
-const getPercent = decimal => {
-    return decimal * 100 + '%';
-}
-
-const calcGoalProgress = (total, goal) => {
-    return getPercent(total/goal);
-}
-
-const style = {
-    color: 'blue'
-}
-
-const SkiDayCounter2 = ({ total, powder, backcountry, goal }) => {
+const Book = ({title, author, pages}) => {
     return (
-        <section style={style}>
-        <div>
-            <p>Total days: {total}</p>
-        </div>
-        <div>
-            <p>Power days: {powder}</p>
-        </div>
-        <div>
-            <p>Backcountry days: {backcountry}</p>
-        </div>
-        <div>
-            <p>Goal Progress: {calcGoalProgress(total, goal)}</p>
-        </div>
+        <section>
+            <h2>{title}</h2>
+            <p>by: {author}</p>
+            <p>Pages: {pages} page</p>
         </section>
     )
 }
 
+const Library = () => {
+    return (
+        <div>
+            <h1>Welcome to the Library</h1>
+            <Book title="The Sun Also Rises" author="Ernest Hemingway" pages={260}/>
+            <Book title="White Teeth" author="Zadie Smith" pages={480}/>
+            <Book title="Cat's Cradle" author="Kurt Vonnegut" pages={304}/>
+        </div>
+    )
+}
 render(
-    <div>
-        <SkiDayCounter data={skiData} />
-        <SkiDayCounter2 
-            total={skiData.total} 
-            powder={skiData.powder}
-            backcountry = {skiData.backcountry} 
-            goal={skiData.goal} 
-        />
-    </div>,
+    <Library />,
     document.getElementById('root')
 )
