@@ -1,21 +1,38 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { Component } from 'react';
+import { render } from 'react-dom';
 
-class Message extends React.Component {
+let skiData = {
+    total: 50,
+    powder: 20,
+    backcountry: 10,
+    goal: 100
+};
+
+class SkiDayCounter extends Component {
     render() {
-        console.log(this.props);
+        // destructure props object - ES6
+        const { total, powder, backcountry, goal} = this.props.data;
+
         return (
-            <div>
-                <h1 style={{color: this.props.color}}>
-                    {this.props.msg}
-                </h1>
-                <p>I'll check back in {this.props.minutes} minutes.</p>
-            </div>
+            <section>
+                <div>
+                    <p>Total days: {total}</p>
+                </div>
+                <div>
+                    <p>Power days: {powder}</p>
+                </div>
+                <div>
+                    <p>Backcountry days: {backcountry}</p>
+                </div>
+                <div>
+                    <p>Goal: {goal}</p>
+                </div>
+            </section>
         );
     }
 }
 
-ReactDOM.render(
-  <Message msg="how are you?" color='blue' minutes={20}/>,
+render(
+  <SkiDayCounter data={skiData} />,
   document.getElementById('root')
 )
