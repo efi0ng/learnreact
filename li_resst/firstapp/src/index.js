@@ -7,20 +7,33 @@ let bookList = [
     {"title": "Cat's Cradle", "author": "Kurt Vonnegut", "pages": 304}
 ]
 
-const Book = ({title, author, pages}) => {
+const Book = ({title, author, pages, freeBookmark}) => {
     return (
         <section>
             <h2>{title}</h2>
             <p>by: {author}</p>
             <p>Pages: {pages} page</p>
+            <p>Free Bookmark Today: {freeBookmark ? 'yes!' : 'no!'}</p>
         </section>
     )
 }
 
+const Hiring = () => 
+    <div>
+        <p>The library is hiring. Go to www.library.com/jobs for more.</p>
+    </div>
+
+const NotHiring = () =>
+    <div>
+        <p>The library is not hiring. Check back later for more info.</p>
+    </div>
+
 class Library extends Component {
     state = {
-        open: false,
-        visitors: 0
+        open: true,
+        visitors: 0,
+        freeBookmark: true,
+        hiring: true
     }
 
     // arrow functions automatically bind
@@ -39,14 +52,16 @@ class Library extends Component {
             <div>
                 <h1>Welcome to the Library</h1>
                 <p>The library is <strong>{this.state.open ? "open": "closed"}</strong>.</p>
+                <button onClick={this.toggleOpenClosed}>Change</button>        
                 <p>We have had {this.state.visitors} visitors.</p>
-               <button onClick={this.toggleOpenClosed}>Change</button>        
-                 {books.map(
+                {this.state.hiring ? <Hiring /> : <NotHiring />}
+                {books.map(
                     (book, i) => <Book
                         key={i} 
                         title={book.title} 
                         author={book.author} 
                         pages={book.pages}
+                        freeBookmark={this.state.freeBookmark}
                         />
                 )}  
             </div>
