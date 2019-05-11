@@ -1,6 +1,12 @@
 import React from 'react';
 import { render } from 'react-dom';
 
+let bookList = [
+    {"title": "The Sun Also Rises", "author": "Ernest Hemingway", "pages": 260},
+    {"title": "White Teeth", "author": "Zadie Smith", "pages": 480},
+    {"title": "Cat's Cradle", "author": "Kurt Vonnegut", "pages": 304}
+]
+
 const Book = ({title, author, pages}) => {
     return (
         <section>
@@ -11,17 +17,23 @@ const Book = ({title, author, pages}) => {
     )
 }
 
-const Library = () => {
+const Library = ({books}) => {
     return (
         <div>
             <h1>Welcome to the Library</h1>
-            <Book title="The Sun Also Rises" author="Ernest Hemingway" pages={260}/>
-            <Book title="White Teeth" author="Zadie Smith" pages={480}/>
-            <Book title="Cat's Cradle" author="Kurt Vonnegut" pages={304}/>
-        </div>
+            {books.map(
+                (book, i) => <Book
+                    key={i} 
+                    title={book.title} 
+                    author={book.author} 
+                    pages={book.pages}
+                    />
+            )}
+            
+         </div>
     )
 }
 render(
-    <Library />,
+    <Library books={bookList} />,
     document.getElementById('root')
 )
