@@ -33,7 +33,20 @@ class Library extends Component {
         open: true,
         visitors: 0,
         freeBookmark: true,
-        hiring: true
+        hiring: true,
+        data: [],
+        loading: false
+    }
+
+    componentDidMount() {
+        this.setState({loading: true})
+        fetch('https://hplussport.com/api/products/order/price/sort/asc/qty/1')
+            .then(data => data.json())
+            .then(data => this.setState({data, loading:false}))
+    }
+
+    componentDidUpdate() {
+        console.log("The component just updated.")
     }
 
     // arrow functions automatically bind
@@ -55,6 +68,20 @@ class Library extends Component {
                 <button onClick={this.toggleOpenClosed}>Change</button>        
                 <p>We have had {this.state.visitors} visitors.</p>
                 {this.state.hiring ? <Hiring /> : <NotHiring />}
+                {this.state.loading 
+                    ? "loading..."
+                    : <div>
+                        {this.state.data.map((product, i) => {
+                            return(
+                                <div key={i}>
+                                    <h3>Library Product of the Week!</h3>
+                                    <h4>{product.name}</h4>
+                                    <img src={product.image} height={100} alt={product.name}/>
+                                </div>
+                            )
+                        })}
+                    </div>
+                }
                 {books.map(
                     (book, i) => <Book
                         key={i} 
