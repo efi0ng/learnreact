@@ -3,10 +3,11 @@ import React, {Component} from 'react';
 let bookList = [
     {"title": "The Sun Also Rises", "author": "Ernest Hemingway", "pages": 260},
     {"title": "White Teeth", "author": "Zadie Smith", "pages": 480},
-    {"title": "Cat's Cradle", "author": "Kurt Vonnegut", "pages": 304}
+    {"title": "Cat's Cradle", "author": "Kurt Vonnegut", "pages": 304},
+    {}
 ]
 
-const Book = ({title, author, pages, freeBookmark}) => {
+const Book = ({title="No title", author="No author", pages=0, freeBookmark}) => {
     return (
         <section>
             <h2>{title}</h2>
@@ -28,6 +29,13 @@ const NotHiring = () =>
     </div>
 
 class Library extends Component {
+    static defaultProps = {
+        books: [
+            {"title": "Tahoe Tales", "author": "Chet Whitley", "pages": 1000}
+        ],
+        visitorStep: 1
+    }
+
     state = {
         open: true,
         visitors: 0,
