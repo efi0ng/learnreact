@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 let bookList = [
-    {"title": "The Sun Also Rises", "author": "Ernest Hemingway", "pages": 260},
-    {"title": "White Teeth", "author": "Zadie Smith", "pages": 480},
-    {"title": "Cat's Cradle", "author": "Kurt Vonnegut", "pages": 304},
-    {}
-]
+        {"title": "Why we sleep", "author": "Matthew Walker", "pages": 360},       
+        {"title": "The Sun Also Rises", "author": "Ernest Hemingway", "pages": 260},
+        {"title": "White Teeth", "author": "Zadie Smith", "pages": 480},
+        {"title": "Cat's Cradle", "author": "Kurt Vonnegut", "pages": 304}
+];
 
 const Book = ({title="No title", author="No author", pages=0, freeBookmark}) => {
     return (
@@ -101,6 +102,18 @@ class Library extends Component {
             </div>
         );
     }
+};
+
+Library.propTypes = {
+    books: PropTypes.array,
+    visitorStep: PropTypes.number
+};
+
+Book.propTypes = {
+    title: PropTypes.string,
+    author: PropTypes.string,
+    pages: PropTypes.number,
+    freeBookmark: PropTypes.bool
 }
 
 export {Library, bookList};
